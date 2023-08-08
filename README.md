@@ -9,5 +9,3 @@ It is not meant to be used stand alone (although some simple spectral generation
 Documentation can be found [here](https://tudarsm.github.io/diacars.jl/dev)
 
 [![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://tudarsm.github.io/diacars.jl/dev)
-[![Build Status](https://git.rwth-aachen.de/tuda_rsm/cross-sections/cars/DiaCARS.jl/badges/master/pipeline.svg)](https://git.rwth-aachen.de/tuda_rsm/cross-sections/cars/DiaCARS.jl/pipelines)
-[![Coverage](https://git.rwth-aachen.de/tuda_rsm/cross-sections/cars/DiaCARS.jl/badges/master/coverage.svg)](https://git.rwth-aachen.de/tuda_rsm/cross-sections/cars/DiaCARS.jl/commits/master)

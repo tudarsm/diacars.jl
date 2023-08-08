@@ -22,10 +22,9 @@ export simulateConvolvedSpectrum
 export calculateBoltzmannFraction
 
 """
-    simulateTheoreticalSusceptibility(T,Species,P,Model,ROI,FrequencyOffset)
+    χR,χI,ω,Species,MolecularParameters=simulateTheoreticalSusceptibility(T,Species,P,Model,ROI,FrequencyOffset)
 
 Simulates the theoretical suscepbtility of a given Species based on temperature T in K, pressure P in bar on a wavenumberarray ω based on the region of interest ROI 
-The calculated amplitudes are valid only for single-pump CARS. For Dual-Pump Spectra, the results have to be divided by two.
 
 - T: Temperature in K
 - Species: "N2","O2" or "CO"

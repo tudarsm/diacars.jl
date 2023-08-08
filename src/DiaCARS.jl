@@ -27,6 +27,12 @@ export calculateBoltzmannFraction
 Simulates the theoretical suscepbtility of a given Species based on temperature T in K, pressure P in bar on a wavenumberarray ω based on the region of interest ROI 
 The calculated amplitudes are valid only for single-pump CARS. For Dual-Pump Spectra, the results have to be divided by two.
 
+- T: Temperature in K
+- Species: "N2","O2" or "CO"
+- P: Pressure in Bar
+- Model: "I" for isolated lines, "V" for Voigt profile or "R" for rotational diffusion
+- ROI: [ωmin ωmax], range for which to calculate the suscepbtility. Expect edge effects if using Voigt
+- ωres: Resolution of original wavenumber array. Should be sufficiently small to resolve transitions.
 """
 function simulateTheoreticalSusceptibility(T,Species,P,Model,ROI,ωres)
 
@@ -43,14 +49,6 @@ function simulateTheoreticalSusceptibility(T,Species,P,Model,ROI,ωres)
 end
 
 
-"""
-simulateConvolvedSpectrum(χR,χI,γ,method,ω)
-
-Takes the result of simulateTheoreticalSusceptibility() and performs the convolution.
-method can be "Yuratich" or "Teets", see Ref XX for what this means.
-Depending on the size of χ, this function detects if the functions for dual- or single-pump spectra is used.
-
-"""
 function simulateConvolvedSpectrum(χR,χI,γ,method,ω)
     I = convolveTheoSusc(χR,χI,1,"single",ω,ωres)
     return I
@@ -59,10 +57,6 @@ end
 
 ⋆(a,b) = dconv_edge(a,b)
 
-"""dconv_edge()
-Function to do a fast convolution on an array signal with kernel kern that produces an output 
-that has the same size as signal. Attention: has edge effects by design, account for this by enlargening your input signal.
-Uses LoopVectorization for speed."""
 function dconv_edge(signal::Vector{T},kern::Vector{T}) where {T}
     M = length(kern)
     N = length(signal)
@@ -79,10 +73,6 @@ function dconv_edge(signal::Vector{T},kern::Vector{T}) where {T}
 end
 
 
-"""
-Produces a Gaussian kernel with FHWM width wid on a grid with resolution ωres.
-Width is determined automatically by 4 times the width.
-"""
 
 function gaussiankernelT(ωres::T,wid::T) where {T<:Real}
     # get a grid 4 times the width

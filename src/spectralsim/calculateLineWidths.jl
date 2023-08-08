@@ -1,39 +1,3 @@
-"""
-    calculateLineWidths(T,FJ,species)
-
-Calculates the Linewidths for a given species using the MEG law
-
-```@example
-using DiaCARS
-using Plots
-
-Species = "N2"
-T=2000
-MolParams = DiaCARS.getMolecularParameters(Species)
-TT,FJ,GJ,G0V = DiaCARS.calculateTermEnergies(MolParams)
-transitions = DiaCARS.calculateLinePositions(TT)
-γN2 = DiaCARS.calculateLineWidths(T,FJ,Species)
-
-Species = "O2"
-T=2000
-MolParams = DiaCARS.getMolecularParameters(Species)
-TT,FJ,GJ,G0V = DiaCARS.calculateTermEnergies(MolParams)
-transitions = DiaCARS.calculateLinePositions(TT)
-γO2 = DiaCARS.calculateLineWidths(T,FJ,Species)
-
-# Plot the result
-plotlyjs()
-p=plot(DiaCARS.J,[γN2 γO2],label=["N2" "O2"])
-xlabel!("J")
-ylabel!("γ FWHM in cm-1")
-savefig(p, "figure2.html") # ignore this line, this is just for the documentation build process
-```
-
-```@raw html
-<iframe src="../figure2.html" style="height:500px;width:100%;"></iframe>
-```
-
-"""
 function calculateLineWidths(T,FJ,species)
     γ = lineWidthsFromMEG(T,FJ,species)
     return γ
